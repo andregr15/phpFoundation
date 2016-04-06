@@ -1,6 +1,5 @@
-
 <div class="well">
 	<center>
-		<h1>Serviços</h1>
+		<h1>Página não encontrada!</h1>
 	</center>
 </div>
