@@ -1,13 +1,15 @@
 
 <?php
 $rotas = ["Home"=> "index.php", "Contato" => "contato.php", "Empresa" => "empresa.php", "Produtos" => "produto.php", "Serviços" => "servicos.php", "Contato Enviado" => "contatoEnviado.php", "404" => "404.php"];
+
+$rota = "";
 $rota = parse_url("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
 
 function checarRota(string $rota)
 {
     $nomeArquivo = substr($rota, 1, strlen($rota) -1);
 
-    if($nomeArquivo == "")
+    if(!isset($nomeArquivo) || $nomeArquivo == "")
     {
         $nomeArquivo = "index.php";
     }
