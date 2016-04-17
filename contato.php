@@ -6,7 +6,7 @@
 		
 <div class="panel panel-default">
 	<div class="panel-body">
-	<form method="post"  action="contatoEnviado.php" >
+	<form method="post"  action="contatoEnviado" >
 		Nome:<br>
 		<input type="text" name="nome"/><br>
 		E-mail:<br>
