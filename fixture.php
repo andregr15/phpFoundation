@@ -19,8 +19,10 @@ $conexao = getConexao();
 			$conexao->query("create database paginas;");
 			
 			echo "removendo as tabelas....<br>";
-			$conexao->query("drop table if exists paginas;");
+			
+			$conexao->query("drop table if exists paginas.paginas;");
 						
+			$conexao->query("drop table if exists paginas.usuarios;");
 			
 			echo "criando tabelas....<br>";
 			
@@ -31,6 +33,12 @@ $conexao = getConexao();
 						title text,
 						pagina text,
 						primary key (id)
+					);
+					create table paginas.usuarios
+					(
+						nome varchar(255),
+						senha text,
+						primary key (nome)
 					);");
 					
 			echo "inserindo os dados....<br>";
@@ -114,9 +122,23 @@ $conexao = getConexao();
 			
 			foreach($dados as $dado)
 			{
-				inserirDados($dado, $conexao);
+				inserirDados($dado, $conexao, 0);
 			}
 			
+            $dados = array
+            (
+                "usuario" => array 
+                (
+                    "nome" => "admin",
+                    "password" => password_hash("admin", PASSWORD_DEFAULT)
+                )
+            );
+
+            foreach($dados as $dado)
+			{
+                inserirDados($dado, $conexao, 1);
+			}
+
 			echo "processo finalizado com sucesso...<br><br>";
 			/*
 			$sth = $conexao->prepare("SELECT * from sakila.actor;");
@@ -133,16 +155,27 @@ $conexao = getConexao();
 		}
 	}
 	
-	function inserirDados(array $dado, \PDO $conexao)
+	function inserirDados(array $dado, \PDO $conexao, int $usuario)
 	{
 		try
 		{
-			$sql = "insert into paginas.paginas (nome, title, pagina) values (:nome, :titulo, :pagina);";
-			$stmt = $conexao->prepare($sql);
-			$stmt->bindValue("nome", $dado['nome']);
-			$stmt->bindValue("titulo", $dado['title']);
-			$stmt->bindValue("pagina", $dado['pagina']);
-			$ret = $stmt->execute();
+            if($usuario == 1)
+            {
+                $sql = "insert into paginas.usuarios (nome, senha) values (:nome, :password);";
+			    $stmt = $conexao->prepare($sql);
+			    $stmt->bindValue("nome", $dado['nome']);
+			    $stmt->bindValue("password", $dado['password']);
+                $ret = $stmt->execute();
+            }
+            else
+            {
+			    $sql = "insert into paginas.paginas (nome, title, pagina) values (:nome, :titulo, :pagina);";
+			    $stmt = $conexao->prepare($sql);
+			    $stmt->bindValue("nome", $dado['nome']);
+			    $stmt->bindValue("titulo", $dado['title']);
+			    $stmt->bindValue("pagina", $dado['pagina']);
+			    $ret = $stmt->execute();
+            }
 		}
 	    catch(\PDOException $ex)
 		{

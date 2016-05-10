@@ -6,6 +6,7 @@ $rotas = ["Home"=> "index.php", "Contato" => "contato.php", "Empresa" => "empres
 
 $rota = "";
 $rota = parse_url("http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+$titulo = "";
 
 function checarRota(string $rota)
 {
@@ -17,20 +18,25 @@ function checarRota(string $rota)
     }
 
     $nomeArquivo = strpos($nomeArquivo, ".php") ? $nomeArquivo : $nomeArquivo . ".php"; 
-
+    
 	switch($nomeArquivo)	
 	{
 		case "index.php":
 		case "contatoEnviado.php":
 		case "fixture.php":
+        case "login.php":
+        case "administracao.php":
+			$titulo = str_replace(".php", "", $nomeArquivo);
 			break;
 		case "contato.php":
 		case "empresa.php":
 		case "produtos.php":
 		case "servicos.php":
+			$titulo = str_replace(".php", "", $nomeArquivo);
 			$nomeArquivo = getPagina(strtolower(str_replace(".php", "", $nomeArquivo)))['pagina'];
 			break;
 		default:
+			$titulo = "404";
 			$nomeArquivo = getPagina("404")['pagina'];
 			break;
 	}
@@ -75,7 +81,9 @@ $nomeArquivo = checarRota($rota['path']);
 <html>
 	<head>
         <link href="css/bootstrap.min.css" rel="stylesheet">
-		<title><?php $titulo = str_replace(".php", "", $nomeArquivo); echo strtoupper($titulo[0]) . substr($titulo, 1, strlen($titulo) -1);?></title>
+        <meta charset="utf-8">
+        <script src="../ckeditor.js"></script>
+		<title><?php echo $titulo; ?></title>
 	</head>
 	
 	<body>

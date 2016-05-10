@@ -18,7 +18,7 @@
 			<option value="outros">Outros</option>
 		</select>	  
 		Mensagem:<br>
-		<textarea rows="4" cols="50" name="mensagem"></textarea><br>
+		<textarea rows="4" cols="50" name="mensagem"/><br>
 		<input type="submit" value="Evniar"/>
 	</form>
 	</div>
