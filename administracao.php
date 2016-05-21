@@ -39,14 +39,13 @@ if(isset($_GET['pagina']))
 	$paginaEdicao = getPagina($nomePagina)['pagina'];
 }
 
-if(isset($_REQUEST['salvar']) && isset($_SESSION['salvar']))
+if(isset($_POST['salvar']) && isset($_POST['nomePagina']))
 {
-	echo $_POST['editor1'] . "<br>" . $nomePagina;
-	$paginaEdicao = "Ok";
-	//atualizarPagina($nomePagina, $_POST[ 'editor1' ]);
+	atualizarPagina($_POST['nomePagina'], stripslashes(str_replace('"', '\\"', trim(preg_replace('/\s\s+/', ' ',  $_POST['editor1'])))));
+	$paginaEdicao = 'A página ' . $_POST['nomePagina'] . ' foi atualizada com sucesso!';
 }
 
-if(isset($_REQUEST['cancelar']) && isset($_SESSION['cancelar']))
+if(isset($_REQUEST['cancelar']))
 {
 	$paginaEdicao = "";
 	$nomePagina = "";
@@ -83,7 +82,7 @@ function atualizarPagina(string $nomePagina, string $pagina)
 	{
 		$conexao = getConexao();
 		
-		$sql = "update paginas.pagina set pagina = :pagina where nome = :nome;";
+		$sql = "update paginas.paginas set pagina = :pagina where nome = :nome;";
 		$stmt = $conexao->prepare($sql);
 		$stmt->bindValue("nome", $nomePagina);
 		$stmt->bindValue("pagina", $pagina);
@@ -124,17 +123,19 @@ function atualizarPagina(string $nomePagina, string $pagina)
 				</ul>
 				
 				<textarea name="editor1" id="editor1" rows="500" cols="1000">
-					<?php echo stripslashes($paginaEdicao);?>
                 </textarea>
-                <script>
-                    // Replace the <textarea id="editor1"> with a CKEditor
-                    // instance, using default configuration.
-                    CKEDITOR.replace( 'editor1' );
+                <script type="text/javascript">
+				      CKEDITOR.replace( 'editor1' );
+                      CKEDITOR.instances.editor1.on('instanceReady',function(){
+                      CKEDITOR.instances.editor1.setData('<?php echo stripslashes($paginaEdicao);?>');
+                     });
+
                 </script>
 				<br>
 				<input type="submit" name="salvar" value="Salvar"/>
 				<input type="submit" name="cancelar" value="Cancelar"/>
 				<input type="submit" name="deslogar" value="Deslogar"/>
+				<input type="hidden" name="nomePagina" value="<?php echo $nomePagina;?>">
 	        </form>
         <br>
 	</div>

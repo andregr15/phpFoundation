@@ -49,74 +49,74 @@ $conexao = getConexao();
 					(
 						"nome" => "empresa",
 						"title" => "Empresa",
-						"pagina" => "<div class=\"well\">
-										<center>
-											<h1>Empresa</h1>
-										</center>
-									</div>"
+						"pagina" => '<div class="well">'.
+										'<center>'.
+											'<h1>Empresa</h1>'.
+										'</center>'.
+									'</div>'
 					),
 					
 				"produtos" => array
 					(
 						"nome" => "produtos",
 						"title" => "Produtos",
-						"pagina" => "<div class=\"well\">
-										<center>
-											<h1>Produtos</h1>
-										</center>
-									</div>"
+						"pagina" => '<div class="well">'.
+										'<center>'.
+											'<h1>Produtos</h1>'.
+										'</center>'.
+									'</div>'
 					),
 					
 				"servicos" => array
 					(
 						"nome" => "servicos",
 						"title" => "Serviços",
-						"pagina" => "<div class=\"well\">
-										<center>
-											<h1>Serviços</h1>
-										</center>
-									</div>"
+						"pagina" => '<div class="well">'.
+										'<center>'.
+											'<h1>Serviços</h1>'.
+										'</center>'.
+									'</div>'
 					),
 					
 				"contato" => array
 					(
 						"nome" => "contato",
 						"title" => "Contato",
-						"pagina" => "<div class=\"well\">
-										<center>
-											<h1>Contato</h1>
-										</center>
-									</div>
+						"pagina" => '<div class="well">'.
+										'<center>'.
+											'<h1>Contato</h1>'.
+										'</center>'.
+									'</div>'.
 											
-									<div class=\"panel panel-default\">
-										<div class=\"panel-body\">
-										<form method=\"post\" action=\"contatoEnviado\" >
-											Nome:<br>
-											<input type=\"text\" name=\"nome\"/><br>
-											E-mail:<br>
-											<input type=\"text\" name=\"email\"/><br>
-											Assunto:<br>
-											<select name=\"assunto\">
-												<option value=\"suporte\">Suporte</option>
-												<option value=\"ouvidoria\">Ouvidoria</option>
-												<option value=\"outros\">Outros</option>
-											</select>	  
-											Mensagem:<br>
-											<textarea rows=\"4\" cols=\"50\" name=\"mensagem\"></textarea><br>
-											<input type=\"submit\" value=\"Evniar\"/>
-										</form>
-										</div>
-									</div>"
+									'<div class="panel panel-default">'.
+										'<div class="panel-body">'.
+										'<form method="post" action="contatoEnviado">'.
+											'Nome:<br>'.
+											'<input type="text" name="nome"><br>'.
+											'E-mail:<br>'.
+											'<input type="text" name="email"/><br>'.
+											'Assunto:<br>'.
+											'<select name="assunto">'.
+												'<option value="suporte">Suporte</option>'.
+												'<option value="ouvidoria">Ouvidoria</option>'.
+												'<option value="outros">Outros</option>'.
+											'</select>'.
+											'Mensagem:<br>'.
+											'<textarea rows="4" cols="50" name="mensagem"></textarea><br>'.
+											'<input type="submit" value="Evniar"/>'.
+										'</form>'.
+										'</div>'.
+									'</div>'
 					),
 					"404" => array
 					(
 						"nome" => "404",
 						"title" => "Página não encontrada",
-						"pagina" => "<div class=\"well\">
-										<center>
-											<h1>Página não encontrada!</h1>
-										</center>
-									</div>"
+						"pagina" => '<div class=\"well\">'.
+										'<center>'.
+											'<h1>Página não encontrada!</h1>'.
+										'</center>'.
+									'</div>'
 					)
 			);
 			

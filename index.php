@@ -87,29 +87,31 @@ $nomeArquivo = checarRota($rota['path']);
 	</head>
 	
 	<body>
-    	<?php 
-            require_once("menu.php"); 
-            if($nomeArquivo == "index.php" || $nomeArquivo == "index") 
-            {   
-                echo "<div class=\"well\">	<center>		<h1>Home</h1>	</center></div>";
-            }
+		<center>
+			<?php 
+				require_once("menu.php"); 
+				if($nomeArquivo == "index.php" || $nomeArquivo == "index") 
+				{   
+					echo "<div class=\"well\">	<center>		<h1>Home</h1>	</center></div>";
+				}
 
-			if(str_replace(".php", "", $nomeArquivo) == "404")
-            {
-                //gerando erro no php, peguntei na parte de dúvidas e não obtive resposata até o momento 07/04/2016 18:22
-                header("HTTP/1.0 404 Not Found");
-            }
-			
-			if(strpos($nomeArquivo, "<div ") === false)
-			{
-				require_once($nomeArquivo);     
-			}
-			else if($nomeArquivo != "index.php" && $nomeArquivo != "index" && $nomeArquivo != "contatoEnviado.php" && $nomeArquivo != "contatoEnviado")
-			{
-				print_r($nomeArquivo);
-			}			
-           
-		?>
+				if(str_replace(".php", "", $nomeArquivo) == "404")
+				{
+					//gerando erro no php, peguntei na parte de dúvidas e não obtive resposata até o momento 07/04/2016 18:22
+					header("HTTP/1.0 404 Not Found");
+				}
+				
+				if(strpos($nomeArquivo, "<div ") === false)
+				{
+					require_once($nomeArquivo);     
+				}
+				else if($nomeArquivo != "index.php" && $nomeArquivo != "index" && $nomeArquivo != "contatoEnviado.php" && $nomeArquivo != "contatoEnviado")
+				{
+					print_r($nomeArquivo);
+				}			
+			   
+			?>
+		</center>
 	</body>
 	
 	<?php require_once("rodape.php"); ?>
